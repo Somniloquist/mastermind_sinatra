@@ -43,12 +43,16 @@ class Game
   attr_accessor :current_turn
   attr_reader :board, :player, :ai_player, :max_turns, :code_length
   def initialize(input = {})
-    @player = get_human_player
+    @player = input.fetch(:player)
     @ai_player = get_ai_player
     @board = Board.new(secret: get_secret_code)
     @current_turn = 1
     @max_turns = input.fetch(:turns, 10)
     @code_length = input.fetch(:code_length, 4)
+  end
+
+  def save
+    
   end
 
   def play
@@ -63,7 +67,14 @@ class Game
     end
   end
 
-  private
+
+
+
+
+
+
+
+  # private
 
   def player_plays
     max_turns.times do 

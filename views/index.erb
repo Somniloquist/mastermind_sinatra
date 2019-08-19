@@ -5,10 +5,27 @@
 
   <meta name="description" content="Mastermind">
   <meta name="author" content="Robin Unger">
-
   <link rel="stylesheet" type="text/css" href="<%=url('stylesheets/index.css')%>">
 </head>
 
 <body>
-  <h1>Hello mastermind!</h1>
+  <h1>Mastermind</h1>
+
+  <% if @session[:game].nil?%>
+    <form method="post">
+      <h3>Setup</h3>
+      <label for="turns">Number of turns</label>
+      <input id="turns" type="number" value="12" name="turns">
+      <label for="code-master">Code Master</label>
+      <input id="code-master" type="radio" value="2" name="role" formmethod="post"></input>
+      <label for="code-breaker">Code Breaker</label>
+      <input id="code-breaker" type="radio" value="1" name="role" formmethod="post" checked></input>
+      <input type="submit" value="Start Game" method="post"></input>
+    </form>
+  <% else %>
+    <%= erb :_color_picker %>
+    <%= erb :_board %>
+  <% end %>
+
+  <p>Session: <%= @session.inspect %><p>
 </body>
