@@ -1,9 +1,9 @@
-<% @game.push_to_decoding_grid([Cell.new(1), Cell.new(2), Cell.new(3), Cell.new(4)]) %>
-
 <div id="board">
   <% @game.board.decoding_grid.each_with_index do | row, i| %>
     <% row.each do |cell| %>
-      <div class="peg <%= settings.colors[cell.value] %>"></div>
+    <!--
+      <div class="peg <%=settings.colors[cell.value]%>"></div>
+      -->
     <% end %>
   <% end %>
 </div>

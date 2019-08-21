@@ -1,19 +1,17 @@
-<form id='color-picker'>
-  <div>
-    <input type="button" class="peg red">
-    <input type="button" class="peg green">
-    <input type="button" class="peg blue">
-    <input type="button" class="peg yellow">
-    <input type="button" class="peg brown">
-    <input type="button" class="peg orange">
-    <input type="button" class="peg black">
-    <input type="button" class="peg white">
-  </div>
-  <div>
-    <span class="peg empty"></span>
-    <span type="button" class="peg empty"></span>
-    <span type="button" class="peg empty"></span>
-    <span type="button" class="peg empty"></span>
-    <input type="submit" value="Submit"></input>
-  </div>
+<form id='color-picker' method="post">
+  <% @game.code_length.times do |num| %>
+    <select name="color-<%=num+1%>" required>
+      <option value="" disabled selected>Choose a color</option>
+      <option value="1">Red</option>
+      <option value="2">Green</option>
+      <option value="3">Blue</option>
+      <option value="4">Yellow</option>
+      <option value="5">Brown</option>
+      <option value="6">Orange</option>
+      <option value="7">Black</option>
+      <option value="8">White</option>
+    </select>
+  <% end %>
+
+  <input type="submit" value="Submit"></input>
 </form>
