@@ -14,16 +14,33 @@
   <% unless @game %>
     <%= erb :_setup %>
   <% else %>
-    <%= erb :_color_picker %>
+    <% if @game.game_won %>
+      <h2>Congratulations, you win!</h2>
+    <% elsif @game.current_turn >= @game.max_turns %>
+      <h2>Game Over, you lose.</h2>
+    <% else %>
+      <%= erb :_color_picker %>
+    <% end %>
     <%= erb :_board %>
 
     <div class="cheats">
-      Secret Code: 
-      <% @game.board.secret.each do |cell|  %>
-        <%= cell.value %>
-      <% end %>
+      <div>
+        Secret Code: 
+        <% @game.board.secret.each do |cell|  %>
+          <%= cell.value %>
+        <% end %>
+        <% unless @game.board.key_grid.empty?%>
+          Matches: 
+          <% @game.board.key_grid.last.each do |cell|  %>
+            <%= cell.value %>
+          <% end %>
+        <% end %>
+      </div>
+      <div>Game Won? <%= @game.game_won %></div>
+      <div>Current Turn: <%= @game.current_turn %></div>
+      <div>Max Turns: <%= @game.max_turns %></div>
     </div>
-    
+
   <% end %>
 
 

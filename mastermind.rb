@@ -40,7 +40,7 @@ class Player
 end
 
 class Game
-  attr_accessor :current_turn
+  attr_accessor :current_turn, :game_won
   attr_reader :board, :player, :ai_player, :max_turns, :code_length
   def initialize(input = {})
     @player = input.fetch(:player)
@@ -49,10 +49,7 @@ class Game
     @current_turn = 1
     @max_turns = input.fetch(:turns, 10)
     @code_length = input.fetch(:code_length, 4)
-  end
-
-  def save
-    
+    @game_won = false
   end
 
   def play
@@ -67,6 +64,11 @@ class Game
     end
   end
 
+  def player_wins?(matches)
+    return false unless matches.length == @code_length
+    matches.each { |cell| return false unless cell.value == "1" }
+    @game_won = true
+  end
 
 
 
@@ -234,7 +236,7 @@ class Game
 
   def get_random_code
     code = []
-    4.times { code << Cell.new((0..9).to_a.sample.to_s) }
+    4.times { code << Cell.new((1..8).to_a.sample.to_s) }
     code
   end
 

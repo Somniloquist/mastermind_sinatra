@@ -45,7 +45,7 @@
   }
 
   .perfect-match { background: black; }
-  .rough-match { background: ; }
+  .partial-match { background: white; }
 
   .red { background: red; }
   .green { background: green; }
