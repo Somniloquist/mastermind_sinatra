@@ -49,4 +49,9 @@ class Mastermind < Sinatra::Base
     redirect '/'
   end
 
+  post '/reset_game' do
+    session.delete(:game)
+    redirect '/'
+  end
+
 end
