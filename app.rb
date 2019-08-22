@@ -1,9 +1,19 @@
 class Mastermind < Sinatra::Base
   configure do
+    set :colors => {
+      "1" => "red",
+      "2" => "green",
+      "3" => "blue",
+      "4" => "yellow",
+      "5" => "brown",
+      "6" => "orange",
+      "7" => "black",
+      "8" => "white"
+    }
     # enable secure sessions
   end
 
-  def add_guess_to_board(params)
+  def get_guess_cells_from_params(params)
     guess = []
     session[:game].code_length.times do |count|
       guess << params["color-#{count+1}"] unless params["color-#{count+1}"].nil?
@@ -27,7 +37,7 @@ class Mastermind < Sinatra::Base
 
   post '/' do
     if session[:game]
-      guess = add_guess_to_board(params)
+      guess = get_guess_cells_from_params(params)
       session[:game].push_to_decoding_grid(guess)
       params.clear
     else

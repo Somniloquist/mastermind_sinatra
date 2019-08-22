@@ -1,9 +1,12 @@
 <div id="board">
-  <% @game.board.decoding_grid.each_with_index do | row, i| %>
-    <% row.each do |cell| %>
-    <!--
-      <div class="peg <%=settings.colors[cell.value]%>"></div>
-      -->
-    <% end %>
+  <% turn = @game.board.decoding_grid.length %>
+  <% @game.board.decoding_grid.reverse.each_with_index do | row, i| %>
+    <div class="row">
+      <span class="turn-display"><%= turn %></span>
+      <% row.each do |cell| %>
+          <div class="peg <%=settings.colors[cell.value]%>"></div>
+      <% end %>
+    </div>
+    <% turn -= 1 %>
   <% end %>
 </div>

@@ -4,11 +4,17 @@
 
   #board {
     background: #eaeaea;
-    min-width: 100px;
-    min-height: 100px;
+    padding: 10px;
+  }
+
+  .turn-display {
+    display: inline-block;
+    width: 2em;
+    text-align: center;
   }
 
   .peg {
+    display: inline-block;
     height: 40px;
     width: 40px;
     border: none;
