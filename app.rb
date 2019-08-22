@@ -10,7 +10,17 @@ class Mastermind < Sinatra::Base
       "7" => "black",
       "8" => "white"
     }
+    set :key_peg_values => {
+      "1" => "perfect-match",
+      "0" => "rough-match"
+    }
     # enable secure sessions
+  end
+
+  configure :development do
+    register Sinatra::Reloader
+    enable :sessions
+    set :session_secret, "secret"
   end
 
   def get_guess_cells_from_params(params)
@@ -20,12 +30,6 @@ class Mastermind < Sinatra::Base
     end
 
     guess.map { |color| Cell.new(color) }
-  end
-
-  configure :development do
-    register Sinatra::Reloader
-    enable :sessions
-    set :session_secret, "secret"
   end
 
   get '/' do
@@ -38,6 +42,8 @@ class Mastermind < Sinatra::Base
   post '/' do
     if session[:game]
       guess = get_guess_cells_from_params(params)
+      matches = session[:game].get_code_matches(guess, session[:game].board.secret)
+      session[:game].push_to_key_grid(matches)
       session[:game].push_to_decoding_grid(guess)
       params.clear
     else

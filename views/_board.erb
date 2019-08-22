@@ -6,6 +6,9 @@
       <% row.each do |cell| %>
           <div class="peg <%=settings.colors[cell.value]%>"></div>
       <% end %>
+      <% @game.board.key_grid.reverse[i].each do |key_cell| %>
+        <span class="key-peg <%=settings.key_peg_values[key_cell.value]%>"></span>
+      <% end %> 
     </div>
     <% turn -= 1 %>
   <% end %>

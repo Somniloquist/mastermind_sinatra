@@ -16,7 +16,16 @@
   <% else %>
     <%= erb :_color_picker %>
     <%= erb :_board %>
+
+    <div class="cheats">
+      Secret Code: 
+      <% @game.board.secret.each do |cell|  %>
+        <%= cell.value %>
+      <% end %>
+    </div>
+    
   <% end %>
+
 
 
 </body>
