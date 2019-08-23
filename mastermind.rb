@@ -30,6 +30,10 @@ class Board
     puts ""
     puts "--------+"
   end
+
+  def set_secret_code(code_array)
+    @secret = code_array
+  end
 end
 
 class Player
@@ -231,7 +235,8 @@ class Game
 
   def get_secret_code
     return get_random_code if self.player.role == 1
-    solicit_code { puts "You are the Code Master. Choose a secret code."}
+    return get_random_code
+    # solicit_code { puts "You are the Code Master. Choose a secret code."}
   end
 
   def get_random_code

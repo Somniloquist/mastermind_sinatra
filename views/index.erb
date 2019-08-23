@@ -16,13 +16,21 @@
   <% else %>
     <% if @game.game_won %>
       <h2>Congratulations, you win!</h2>
-    <% elsif @game.current_turn >= @game.max_turns %>
+    <% elsif @game.current_turn > @game.max_turns %>
       <h2>Game Over, you lose.</h2>
     <% else %>
-      <%= erb :_color_picker %>
+
+      <% if @game.player.role == 1 %>
+        <%= erb :_color_picker %>
+      <% else %>
+        <%= erb :_code_picker %>
+      <% end %>
+
     <% end %>
     <%= erb :_board %>
 
+
+    <!-- DEBUG STUFF -->
     <div class="cheats">
       <div>
         Secret Code: 
@@ -39,6 +47,8 @@
       <div>Game Won? <%= @game.game_won %></div>
       <div>Current Turn: <%= @game.current_turn %></div>
       <div>Max Turns: <%= @game.max_turns %></div>
+      <div>Player role: <%= @game.player.role %></div>
+      <div>Secret Code: <%= settings.secret_code %></div>
     </div>
 
   <% end %>

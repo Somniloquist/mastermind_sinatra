@@ -14,6 +14,7 @@ class Mastermind < Sinatra::Base
       "1" => "perfect-match",
       "0" => "partial-match"
     }
+    set :secret_code, ""
     # enable secure sessions
   end
 
@@ -32,15 +33,24 @@ class Mastermind < Sinatra::Base
     guess.map { |color| Cell.new(color) }
   end
 
+  def get_secret_code_from_params(params)
+    code = []
+    session[:game].code_length.times do |count|
+      code << params["code-#{count+1}"] unless params["code-#{count+1}"].nil?
+    end
+
+    code.map { |num| Cell.new(num) }
+  end
+
   get '/' do
     @session = session
     @game = session[:game]
 
-    erb :index 
+    erb :index
   end
 
   post '/' do
-    if session[:game]
+    if session[:game] && session[:game].player.role == 1
       guess = get_guess_cells_from_params(params)
       matches = session[:game].get_code_matches(guess, session[:game].board.secret)
       session[:game].push_to_key_grid(matches)
@@ -48,6 +58,9 @@ class Mastermind < Sinatra::Base
       session[:game].player_wins?(matches)
       session[:game].next_turn
       params.clear
+    elsif session[:game] && session[:game].player.role == 2
+      session[:game].board.set_secret_code(get_secret_code_from_params(params))
+      session[:game].ai_plays
     else
       turns = params['turns'].to_i
       player = Player.new(role: params['role'].to_i)
