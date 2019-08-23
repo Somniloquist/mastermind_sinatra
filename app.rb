@@ -55,7 +55,7 @@ class Mastermind < Sinatra::Base
       matches = session[:game].get_code_matches(guess, session[:game].board.secret)
       session[:game].push_to_key_grid(matches)
       session[:game].push_to_decoding_grid(guess)
-      session[:game].player_wins?(matches)
+      session[:game].game_won?(matches)
       session[:game].next_turn
       params.clear
     elsif session[:game] && session[:game].player.role == 2

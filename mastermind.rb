@@ -68,7 +68,7 @@ class Game
     end
   end
 
-  def player_wins?(matches)
+  def game_won?(matches)
     return false unless matches.length == @code_length
     matches.each { |cell| return false unless cell.value == "1" }
     @game_won = true
@@ -103,7 +103,10 @@ class Game
       matches = get_code_matches(guess, board.secret)
       push_to_decoding_grid(guess)
       push_to_key_grid(matches)
-      return true if codes_match?(guess, board.secret)
+      if codes_match?(guess, board.secret)
+        @game_won = true
+        return true
+      end
 
       guess = ai_guess_again(guess)
 

@@ -14,9 +14,9 @@
   <% unless @game %>
     <%= erb :_setup %>
   <% else %>
-    <% if @game.game_won %>
+    <% if @game.player.role == 1 && @game.game_won || @game.player.role == 2 && @game.current_turn > @game.max_turns %>
       <h2>Congratulations, you win!</h2>
-    <% elsif @game.current_turn > @game.max_turns %>
+    <% elsif (@game.player.role == 1 && @game.current_turn > @game.max_turns) || (@game.player.role == 2 && @game.game_won)%>
       <h2>Game Over, you lose.</h2>
     <% else %>
 
@@ -28,6 +28,17 @@
 
     <% end %>
     <%= erb :_board %>
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- DEBUG STUFF -->
