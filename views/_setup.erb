@@ -1,10 +1,21 @@
-<form method="post">
-  <h3>Setup</h3>
-  <label for="turns">Number of turns</label>
-  <input id="turns" type="number" value="12" name="turns">
-  <label for="code-master">Code Master</label>
-  <input id="code-master" type="radio" value="2" name="role"></input>
-  <label for="code-breaker">Code Breaker</label>
-  <input id="code-breaker" type="radio" value="1" name="role" checked></input>
-  <input type="submit" value="Start Game"></input>
-</form>
+  <form method="post">
+      <h2 class="display-5">Setup your game</h2>
+      <hr class="my-4">
+      <div class="form-group">
+        <label for="turns">Number of turns</label>
+        <input class="form-control" id="turns" type="number" value="12" name="turns">
+      </div>
+
+      <div class="form-group">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-secondary">Code Breaker
+            <input type="radio" value="1" name="role" checked></input>
+          </label>
+          <label class="btn btn-secondary">Code Master
+            <input type="radio" value="2" name="role"></input>
+          </label>
+        </div>
+      </div>
+
+      <input class="btn btn-primary" type="submit" value="Start Game"></input>
+  </form>

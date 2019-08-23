@@ -6,64 +6,41 @@
   <meta name="description" content="Mastermind">
   <meta name="author" content="Robin Unger">
   <link rel="stylesheet" type="text/css" href="<%=url('stylesheets/index.css')%>">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
-  <h1>Mastermind</h1>
-
-  <% unless @game %>
-    <%= erb :_setup %>
-  <% else %>
-    <% if @game.player.role == 1 && @game.game_won || @game.player.role == 2 && @game.current_turn > @game.max_turns %>
-      <h2>Congratulations, you win!</h2>
-    <% elsif (@game.player.role == 1 && @game.current_turn > @game.max_turns) || (@game.player.role == 2 && @game.game_won)%>
-      <h2>Game Over, you lose.</h2>
-    <% else %>
-
-      <% if @game.player.role == 1 %>
-        <%= erb :_color_picker %>
-      <% else %>
-        <%= erb :_code_picker %>
-      <% end %>
-
-    <% end %>
-    <%= erb :_board %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- DEBUG STUFF -->
-    <div class="cheats">
-      <div>
-        Secret Code: 
-        <% @game.board.secret.each do |cell|  %>
-          <%= cell.value %>
-        <% end %>
-        <% unless @game.board.key_grid.empty?%>
-          Matches: 
-          <% @game.board.key_grid.last.each do |cell|  %>
-            <%= cell.value %>
-          <% end %>
-        <% end %>
-      </div>
-      <div>Game Won? <%= @game.game_won %></div>
-      <div>Current Turn: <%= @game.current_turn %></div>
-      <div>Max Turns: <%= @game.max_turns %></div>
-      <div>Player role: <%= @game.player.role %></div>
-      <div>Secret Code: <%= settings.secret_code %></div>
+  <div class="navbar bg-dark">
+    <div class="logo"><h1>Mastermind.rb</h1></div>
+    <div class="menu">
     </div>
+  </div>
 
+  <div class="container">
+    <div class="jumbotron">
+    <% unless @game %>
+      <%= erb :_setup %>
+    <% else %>
+      <% if (@game.player.role == 1 && @game.game_won) || (@game.player.role == 2 && @game.current_turn > @game.max_turns) %>
+        <h2 class="display-5">Congratulations, you win!</h2>
+        <hr class="my-4">
+      <% elsif (@game.player.role == 1 && @game.current_turn > @game.max_turns) || (@game.player.role == 2 && @game.game_won)%>
+        <h2 class="display-5">Game Over, you lose.</h2>
+        <hr class="my-4">
+      <% else %>
+
+        <% if @game.player.role == 1 %>
+          <h2 class="display-5">Guesses Left: <%= @game.max_turns - @game.current_turn+1 %></h2>
+          <hr class="my-4">
+          <%= erb :_color_picker %>
+        <% else %>
+          <h2 class="display-5">Create a code</h2>
+          <hr class="my-4">
+          <%= erb :_code_picker %>
+        <% end %>
+
+      <% end %>
+      <%= erb :_board %>
+      </div>
   <% end %>
-
-
-
 </body>

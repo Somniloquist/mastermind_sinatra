@@ -1,17 +1,21 @@
 <form id='color-picker' method="post">
-  <% @game.code_length.times do |num| %>
-    <select name="color-<%=num+1%>" required>
-      <option value="" disabled selected>Choose a color</option>
-      <option value="1">Red</option>
-      <option value="2">Green</option>
-      <option value="3">Blue</option>
-      <option value="4">Yellow</option>
-      <option value="5">Brown</option>
-      <option value="6">Orange</option>
-      <option value="7">Black</option>
-      <option value="8">White</option>
-    </select>
-  <% end %>
+  <div class="form-row">
+    <% @game.code_length.times do |num| %>
+      <div class="form-group col-md-3">
+        <select class="form-control"name="color-<%=num+1%>" required>
+          <option value="" disabled selected>Choose a color</option>
+          <option value="1">Red</option>
+          <option value="2">Green</option>
+          <option value="3">Blue</option>
+          <option value="4">Yellow</option>
+          <option value="5">Brown</option>
+          <option value="6">Orange</option>
+          <option value="7">Black</option>
+          <option value="8">White</option>
+        </select>
+      </div>
+    <% end %>
+  </div>
 
-  <input type="submit" value="Submit"></input>
+  <input class="btn btn-primary" type="submit" value="Submit"></input>
 </form>

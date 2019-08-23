@@ -1,0 +1,20 @@
+<div class="cheats">
+  <div>
+    Secret Code: 
+    <% @game.board.secret.each do |cell|  %>
+      <%= cell.value %>
+    <% end %>
+    <% unless @game.board.key_grid.empty?%>
+      Matches: 
+      <% @game.board.key_grid.last.each do |cell|  %>
+        <%= cell.value %>
+      <% end %>
+    <% end %>
+    </div>
+    <div>Game Won? <%= @game.game_won %></div>
+    <div>Current Turn: <%= @game.current_turn %></div>
+    <div>Max Turns: <%= @game.max_turns %></div>
+    <div>Player role: <%= @game.player.role %></div>
+    <div>Secret Code: <%= settings.secret_code %></div>
+  </div>
+</div>
