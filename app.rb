@@ -14,8 +14,10 @@ class Mastermind < Sinatra::Base
       "1" => "perfect-match",
       "0" => "partial-match"
     }
+
     set :secret_code, ""
-    # enable secure sessions
+    enable :sessions
+    set :session_secret, ENV["SESSION_KEY"]
   end
 
   configure :development do
