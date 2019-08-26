@@ -16,5 +16,6 @@ https://afternoon-hamlet-47145.herokuapp.com/
 
 ```bash
 bundle install
-ruby app.rb
+rackup
 ```
+- Open your web browser to http://localhost:9292/ (or port that your specified)
